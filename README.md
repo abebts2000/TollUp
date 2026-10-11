@@ -1,6 +1,6 @@
 # TollUp
 
-A kid-friendly 3D third-person brawler that runs in the browser on computers and phones.
+A kid-friendly top-down 3D arena brawler with a bright cartoon look. It runs in the browser on computers and phones.
 
 Pick a hero, jump into a 1v1, 2v2, 3v3 or Squad (4v4) match, and bonk the other team until their HP runs out. The winner does a special victory move.
 
@@ -14,9 +14,15 @@ Pick a hero, jump into a 1v1, 2v2, 3v3 or Squad (4v4) match, and bonk the other 
 
 ## Controls
 
-**Computer:** WASD or arrow keys to move, mouse to turn and aim the over-the-shoulder camera (click the game first), Space to jump, left click or F to hit, E or right click to use a gadget, Esc to free the mouse.
+**Computer:** WASD or arrow keys to move, point the mouse to aim, left click or F to attack, Q or right click for your Super, E for your gadget, Space to jump.
 
-**Phone or tablet:** drag on the left side to move, drag on the right side to look, tap HIT (hold to keep swinging), JUMP and the gadget button.
+**Phone or tablet:** drag on the left side to move. Drag the red stick to aim and let go to attack (tap it to auto-aim). The yellow stick fires your Super once it's charged. Gadget and JUMP buttons sit above.
+
+## Ammo, Super and bushes
+
+- Each attack uses one of 3 ammo bars, which refill over time.
+- Landing hits charges your Super: Brick's Boulder Slam, Nova's Star Burst (spin plus heal) or Zip's Zip Dash.
+- Enemies standing in bushes are invisible until you get close or they attack.
 
 ## Gadgets
 
