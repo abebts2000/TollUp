@@ -1,6 +1,6 @@
 # TollUp
 
-A kid-friendly top-down 3D arena brawler with a bright cartoon look. It runs in the browser on computers and phones.
+A kid-friendly top-down 3D arena brawler with realistic lighting, textures and foliage. It runs in the browser on computers and phones.
 
 Pick a hero, jump into a 1v1, 2v2, 3v3 or Squad (4v4) match, and bonk the other team until their HP runs out. The winner does a special victory move.
 
@@ -62,4 +62,4 @@ Matchmaking, friends and the shared leaderboard use the Claude artifact runtime 
 
 ## Tech
 
-One self-contained `index.html`: Three.js r128 (loaded from cdnjs) for the 3D graphics and the Web Audio API for all sound effects and music, which are generated in code. No build step.
+One self-contained `index.html`: Three.js r128 (loaded from cdnjs, with its bloom post-processing from jsDelivr) for the 3D graphics and the Web Audio API for all sound effects and music, which are generated in code. No build step.
