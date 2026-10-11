@@ -14,9 +14,32 @@ Pick a hero, jump into a 1v1, 2v2, 3v3 or Squad (4v4) match, and bonk the other 
 
 ## Controls
 
-**Computer:** WASD or arrow keys to move, mouse to look (click the game first), Space to jump, left click or F to hit, Esc to free the mouse.
+**Computer:** WASD or arrow keys to move, mouse to look (click the game first), Space to jump, left click or F to hit, E or right click to use a gadget, Esc to free the mouse.
 
-**Phone or tablet:** drag on the left side to move, drag on the right side to look, tap HIT (hold to keep swinging) and JUMP.
+**Phone or tablet:** drag on the left side to move, drag on the right side to look, tap HIT (hold to keep swinging), JUMP and the gadget button.
+
+## Gadgets
+
+Run into a glowing box in the arena to grab a gadget, then use it with **E**, right click, or the gadget button on phones.
+
+| Gadget | What it does |
+|---|---|
+| Turbo Sneakers | Run 50% faster for 6 seconds |
+| Boing Boots | Jump much higher for 8 seconds |
+| Bubble Shield | Blocks every hit for 5 seconds |
+| Mega Mitts | Hit 60% harder for 7 seconds |
+| Snack Pack | Heals 35% of your HP |
+| Freeze Blaster | 3 ice shots that slow whoever they hit |
+
+## Arena
+
+- A spinning sweeper bar in the middle knocks you away if you don't jump over it.
+- Green bounce pads launch you onto the tall crates.
+- Crates, walls, stone pillars and barrels give you cover.
+
+## Fullscreen on phones
+
+On phones the game asks you to go fullscreen before a match. On iPhone, where browsers can't go fullscreen, add TollUp to your home screen (Share → Add to Home Screen) and open it from there.
 
 ## Progress and rewards
 

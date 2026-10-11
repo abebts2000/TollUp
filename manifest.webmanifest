@@ -1,0 +1,10 @@
+{
+  "name": "TollUp",
+  "short_name": "TollUp",
+  "start_url": "./",
+  "scope": "./",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#0b1026",
+  "theme_color": "#0b1026"
+}
