@@ -1,6 +1,6 @@
 # TollUp
 
-A kid-friendly top-down 3D arena brawler with realistic lighting, textures and foliage. It runs in the browser on computers and phones.
+A kid-friendly top-down 3D arena brawler with anime-style heroes, anime Supers and a tiled arena with bushes and ponds. It runs in the browser on computers and phones.
 
 Pick a hero, jump into a 1v1, 2v2, 3v3 or Squad (4v4) match, and bonk the other team until their HP runs out. The winner does a special victory move.
 
@@ -8,9 +8,9 @@ Pick a hero, jump into a 1v1, 2v2, 3v3 or Squad (4v4) match, and bonk the other 
 
 | Hero | Class | HP | Style | Victory move |
 |---|---|---|---|---|
-| Brick | Tank | 300 | Slow, heavy hits | Ground Pound |
-| Nova | Balanced | 200 | Good at everything | Star Spin |
-| Zip | Fast | 150 | Very quick combos | Flip Flash |
+| Brick | Tank | 300 | Slow, heavy hits, Earth Breaker Super | Ground Pound |
+| Nova | Balanced | 200 | Good at everything, Star Beam Super | Star Spin |
+| Zip | Fast | 150 | Very quick combos, Lightning Dash Super | Flip Flash |
 
 ## Controls
 
@@ -21,7 +21,7 @@ Pick a hero, jump into a 1v1, 2v2, 3v3 or Squad (4v4) match, and bonk the other 
 ## Ammo, Super and bushes
 
 - Each attack uses one of 3 ammo bars, which refill over time.
-- Landing hits charges your Super: Brick's Boulder Slam, Nova's Star Burst (spin plus heal) or Zip's Zip Dash.
+- Landing hits charges your Super: Brick's Earth Breaker (ground slam with rock spikes), Nova's Star Beam (energy blast) or Zip's Lightning Dash. A glowing aura shows when it's ready.
 - Enemies standing in bushes are invisible until you get close or they attack.
 
 ## Gadgets
@@ -39,9 +39,9 @@ Run into a glowing box in the arena to grab a gadget, then use it with **E**, ri
 
 ## Arena
 
-- A spinning sweeper bar in the middle knocks you away if you don't jump over it.
-- Green bounce pads launch you onto the tall crates.
-- Crates, walls, stone pillars and barrels give you cover.
+- A rectangular arena on a tile grid, fenced in by chunky blocks.
+- Crates and stone walls to hide behind, two ponds you can't walk through (shots fly over them).
+- Tall-grass bushes that hide anyone inside, and green bounce pads in the middle.
 
 ## Fullscreen on phones
 
