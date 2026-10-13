@@ -11,6 +11,9 @@ Pick a hero, jump into a 1v1, 2v2, 3v3 or Squad (4v4) match, and bonk the other 
 | Brick | Tank | 300 | Slow, heavy hits, Earth Breaker Super | Ground Pound |
 | Nova | Balanced | 200 | Good at everything, Star Beam Super | Star Spin |
 | Zip | Fast | 150 | Very quick combos, Lightning Dash Super | Flip Flash |
+| Anchor | Captain | 240 | Anchor swings, Anchor Hook pulls enemies in | Anchor Drop |
+| Blaze | Sharpshooter | 170 | Long-range cannonballs, Broadside fires 5 at once | Cannon Flip |
+| Marina | Sea Witch | 190 | Water orbs, Tidal Wave knocks enemies back | Whirlpool Spin |
 
 ## Controls
 
@@ -37,11 +40,16 @@ Run into a glowing box in the arena to grab a gadget, then use it with **E**, ri
 | Snack Pack | Heals 35% of your HP |
 | Freeze Blaster | 3 ice shots that slow whoever they hit |
 
-## Arena
+## Maps
 
-- A rectangular arena on a tile grid, fenced in by chunky blocks.
-- Crates and stone walls to hide behind, two ponds you can't walk through (shots fly over them).
-- Tall-grass bushes that hide anyone inside, and green bounce pads in the middle.
+Pick a map on the home screen or leave it on Random.
+
+- **Meadow:** a tiled grass arena with crates, stone walls, tall-grass bushes, ponds and bounce pads.
+- **Pirate Ship:** a ship deck on the open sea with cannons along the rails, two masts, barrels, a cargo hatch you can't cross and sail-cloth piles to hide in.
+
+## Pirate skins and mascot
+
+Corsair, Deep Sea Pirate and Ghost Pirate skins give any hero a pirate hat or bandana and an eyepatch. Polly Parrot is a new mascot.
 
 ## Fullscreen on phones
 
