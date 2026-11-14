@@ -339,6 +339,23 @@ h2,h3{font-family:var(--display);font-weight:400;letter-spacing:.4px;margin:0;te
 @media (max-width:1020px),(max-height:560px){#classPick{max-width:calc(100% - 540px)}.bcard{width:88px;height:122px}.bc-img{width:104px;height:104px;bottom:22px}.mapb{font-size:12px;padding:5px 2px}}
 @media (max-height:460px){.maps .mt{display:none}.maps{padding:6px}}
 @media (max-width:640px){#classPick{max-width:none}.bcard{width:84px;height:128px}#classPick{bottom:calc(330px + var(--sb))}}
+#anime{position:fixed;inset:0;pointer-events:none!important;overflow:hidden}
+#speedLines{position:absolute;inset:0;width:100%;height:100%;opacity:0}
+#animeFlash{position:absolute;inset:0;background:#fff;opacity:0}
+#animeBars i{position:absolute;left:-20%;width:140%;height:15%;background:var(--ac,#ffd23d);transform:skewY(-8deg) translateX(-110%);box-shadow:0 0 0 6px #0a1236;opacity:.92}
+#animeBars i:nth-child(1){top:20%}
+#animeBars i:nth-child(2){top:66%;background:#fff;transform:skewY(-8deg) translateX(110%)}
+#animeBars.on i{transition:transform .35s cubic-bezier(.2,.9,.2,1);transform:skewY(-8deg) translateX(0)}
+#animeText{position:absolute;left:0;right:0;top:19%;text-align:center;transform:rotate(-6deg);opacity:0}
+#animeText .ak{font-family:var(--display);font-size:clamp(56px,13vw,150px);color:#fff;-webkit-text-stroke:5px #0a1236;text-shadow:8px 8px 0 var(--ac,#ff4f6e);letter-spacing:2px;line-height:1}
+#animeText .an{font-family:var(--display);font-size:clamp(20px,4vw,40px);color:#ffe14d;-webkit-text-stroke:2px #0a1236;margin-top:8px}
+#animeText.pop,#animeSfx.pop{animation:apop .45s cubic-bezier(.2,1.6,.4,1)}
+@keyframes apop{from{transform:rotate(-6deg) scale(2.6);opacity:0}}
+#animeSfx{position:absolute;right:6%;top:56%;font-family:var(--display);font-size:clamp(34px,8vw,90px);color:#ff4f6e;-webkit-text-stroke:4px #fff;transform:rotate(12deg);text-shadow:5px 5px 0 #0a1236;opacity:0}
+#coinGain{position:absolute;left:50%;bottom:16%;transform:translateX(-50%);display:flex;align-items:center;gap:12px;padding:10px 22px;border-radius:18px;background:#0d1640;border:4px solid #0a1236;box-shadow:0 6px 0 #0a1236;font-family:var(--display);font-size:clamp(28px,6vw,54px);color:#ffd23d;-webkit-text-stroke:1.5px #3a2600;white-space:nowrap}
+#coinGain .ico{width:1em;height:1em}
+#coinGain small{font-size:.42em;color:#fff;-webkit-text-stroke:0;font-family:var(--body);font-weight:700}
+@media (prefers-reduced-motion:reduce){#animeBars i{transition:none!important}}
 #fatal{position:fixed;inset:0;display:grid;place-items:center;padding:24px;text-align:center;background:var(--ink);z-index:99}
 
 /* ---------- RESPONSIVE ---------- */
@@ -498,6 +515,7 @@ h2,h3{font-family:var(--display);font-weight:400;letter-spacing:.4px;margin:0;te
     <p>Leave this match? You won't get rewards for it.</p>
     <div class="row"><button id="stayBtn">Stay</button><button class="danger" id="leaveYes">Leave</button></div>
   </div>
+  <div id="anime" hidden><canvas id="speedLines"></canvas><div id="animeFlash"></div><div id="animeBars"><i></i><i></i></div><div id="animeText"><div class="ak">VICTORY!!</div><div class="an" id="animeName"></div></div><div id="animeSfx">DOOON!</div><div id="coinGain" hidden><svg class="ico"><use href="#i-coin"/></svg><span id="coinNum">+0</span><small>TollUp Coins</small></div></div>
   <div id="cine" hidden><div id="cineCap"><div class="big" id="cineBig">Victory!</div><div class="sm" id="cineSm"></div></div></div>
 </div>
 
@@ -558,7 +576,8 @@ h2,h3{font-family:var(--display);font-weight:400;letter-spacing:.4px;margin:0;te
         <div><h3>Winning</h3><ul>
           <li>Bonk the other team until their HP hits 0</li>
           <li>Knock out the whole other team to win</li>
-          <li>The winner does their special victory move</li></ul></div>
+          <li>The winner does their special victory move</li>
+          <li>Win a match to see your hero's anime victory clip and earn 1,000 TollUp Coins</li></ul></div>
         <div><h3>Gadgets</h3><ul>
           <li>Run into a glowing box to grab a gadget</li>
           <li>Use it with <kbd>E</kbd>, right click, or the gadget button on phones</li>
@@ -774,6 +793,9 @@ const SFX={
   ping(v=1){tone({f:1760,t:.25,v:.12*v});tone({f:2637,t:.2,v:.06*v,when:.03});},
   pad(v=1){tone({type:'triangle',f:180,f2:900,t:.3,v:.25*v});tone({f:90,f2:400,t:.25,v:.3*v});},
   bonk(v=1){tone({type:'triangle',f:320,f2:120,t:.2,v:.3*v});noise({type:'lowpass',f:900,t:.08,v:.3*v});},
+  anime(){noise({type:'highpass',f:400,f2:6000,t:.35,v:.2});tone({f:90,f2:38,t:.7,v:.65,when:.3});noise({type:'lowpass',f:2200,f2:200,t:.5,v:.42,when:.3});[523,659,784,1047].forEach((f,i)=>tone({type:'sawtooth',f,t:1.7,v:.03,lp:2400,when:.35+i*.02}));tone({type:'triangle',f:1568,f2:2093,t:.5,v:.08,when:.4});},
+  whoom(){noise({f:300,f2:4000,t:.3,v:.25});tone({f:70,f2:35,t:.5,v:.5,when:.05});},
+  coinTick(){tone({type:'triangle',f:1600+Math.random()*400,t:.07,v:.08});},
   unlock(){[523,659,784,1047,1319].forEach((f,i)=>tone({f,t:.35,v:.14,type:'triangle',when:i*.09}));},
 };
 const midi=n=>440*Math.pow(2,(n-69)/12);
@@ -1692,6 +1714,7 @@ function spawnBots(fillMissing){
   }
 }
 function cleanupMatch(){
+  stopAnimeClip();
   if(!match) return;
   for(const e of match.ents.values()) removeEntity(e);
   for(const p of match.pk.values()) scene.remove(p.g);
@@ -2305,15 +2328,16 @@ function updateMatch(dt,time){
   if(match.mini) match.mini.t-=dt;
   updateCamera(dt,time);
   updateHud(dt);
+  updateAnimeClip(dt);
 }
 function startCutscene(winTeam){
-  match.phase='cutscene'; match.phaseT=5.6; match.winTeam=winTeam;
+  match.phase='cutscene'; match.winTeam=winTeam; match.anime=winTeam===match.me.team; match.phaseT=match.anime?6.8:5.6; match.cutTotal=match.phaseT; match.closeup=false;
   let star=null; const lk=match.lastKO&&match.ents.get(match.lastKO.killer);
   if(lk&&lk.team===winTeam&&lk.alive) star=lk;
   if(!star) for(const e of match.ents.values()) if(e.team===winTeam&&e.alive){star=e;break;}
   if(!star) star=match.me;
   match.star=star;
-  star.emoteT=5.6; star.emoteTotal=5.6; star.emoteFx=-1; star.punchT=0;
+  star.emoteT=match.phaseT; star.emoteTotal=match.phaseT; star.emoteFx=-1; star.punchT=0;
   for(const e of match.ents.values()){e.move.x=e.move.z=0;}
   const won=winTeam===match.me.team;
   $('#cine').hidden=false; $('#cineBig').textContent=won?'Victory!':'Defeat';
@@ -2322,6 +2346,7 @@ function startCutscene(winTeam){
   input.attackHeld=false;
   if(document.pointerLockElement){try{document.exitPointerLock();}catch(e){}}
   Music.play(won?'victory':'defeat');
+  if(match.anime) startAnimeClip(star);
   updateLockHint();
 }
 
@@ -2333,7 +2358,11 @@ function orbit(center,radius,height,yaw){camera.position.set(center.x+Math.sin(y
 function listenerPos(){return match&&match.me?match.me.pos:camera.position;}
 function updateCamera(dt,time){
   const me=match.me; let fp=false;
-  if(match.phase==='cutscene'||match.phase==='results'){match.camYaw+=dt*.45;const s=match.star;orbit(s.pos,lerp(5.5,4,Math.min(1,(5.6-Math.max(0,match.phaseT))/2)),1.9*CLASSES[s.cls].scale,s.yaw+Math.PI+.5+match.camYaw);}
+  if(match.phase==='cutscene'||match.phase==='results'){const s=match.star, el=(match.cutTotal||5.6)-Math.max(0,match.phaseT);
+    if(match.anime&&match.phase==='cutscene'&&el<2.45){
+      match.closeup=true; const C=CLASSES[s.cls], fx=-Math.sin(s.yaw), fz=-Math.cos(s.yaw), rx=Math.cos(s.yaw), rz=-Math.sin(s.yaw), hy=s.pos.y+C.top*.8, d=lerp(2.4,1.55,Math.min(1,el/2.4));
+      camera.position.set(s.pos.x+fx*d+rx*.35,hy+.12,s.pos.z+fz*d+rz*.35); camera.lookAt(s.pos.x,hy-.05,s.pos.z);
+    }else{match.closeup=false;match.camYaw+=dt*.45;const t2=match.anime?el-2.45:el;orbit(s.pos,lerp(5.5,4,Math.min(1,Math.max(0,t2)/2)),1.9*CLASSES[s.cls].scale,s.yaw+Math.PI+.5+match.camYaw);}}
   else if(match.killcam&&match.killcam.t>0&&match.ents.get(match.killcam.id)){const k=match.ents.get(match.killcam.id);match.camYaw+=dt*.6;orbit(k.pos,4.5,1.9,k.yaw+Math.PI+match.camYaw);}
   else if(!me.alive){match.camYaw+=dt*.12;orbit(new V3(0,0,0),20,11,match.camYaw);}
   else if(match.mini&&match.mini.t>0){match.camYaw+=dt*.9;orbit(me.pos,3.8,1.7*CLASSES[me.cls].scale,me.yaw+Math.PI+.4+match.camYaw);}
@@ -2392,6 +2421,53 @@ function updateTeamsUI(){
   ord.forEach((team,si)=>{for(const e of match.ents.values()) if(e.team===team){const p=document.createElement('div');p.className='tpip'+(e.alive?'':' ko')+(e.me?' me':'');p.title=e.name;sides[si].appendChild(p);}});
 }
 
+/* ---- anime victory clip ---- */
+const ANIME={on:false,t:0,f:{},star:null,tick:0};
+const reduceMotion=!!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches);
+const slCanvas=$('#speedLines'), slx=slCanvas.getContext('2d');
+function startAnimeClip(star){
+  const C=CLASSES[star.cls], A=$('#anime');
+  ANIME.on=true; ANIME.t=0; ANIME.f={}; ANIME.star=star; ANIME.tick=0;
+  A.hidden=false; A.style.setProperty('--ac',C.auraCol);
+  $('#animeName').textContent=`${star.name} · ${C.superName}`;
+  for(const id of ['#animeText','#animeSfx']){const el=$(id);el.style.opacity='0';el.classList.remove('pop');}
+  $('#animeBars').classList.remove('on'); $('#coinGain').hidden=true; $('#coinNum').textContent='+0';
+  $('#animeSfx').textContent=pick(['DOOON!','BAAM!','ZAAAN!','GOGOGO!']);
+  $('#cine').hidden=true;
+  slCanvas.width=Math.max(2,Math.round(innerWidth/2)); slCanvas.height=Math.max(2,Math.round(innerHeight/2));
+  if(AU.ctx) SFX.anime();
+}
+function stopAnimeClip(){ANIME.on=false;const A=$('#anime');if(A)A.hidden=true;canvas.style.filter='';}
+function drawSpeedLines(){
+  const w=slCanvas.width,h=slCanvas.height,cx=w/2,cy=h*.45,R=Math.hypot(w,h);
+  slx.clearRect(0,0,w,h);
+  for(let i=0;i<120;i++){const a=Math.random()*Math.PI*2,inner=R*(.17+Math.random()*.2),wd=.004+Math.random()*.012;
+    slx.fillStyle=i%6===0?'rgba(10,18,54,.55)':'rgba(255,255,255,.85)';
+    slx.beginPath();slx.moveTo(cx+Math.cos(a-wd)*R,cy+Math.sin(a-wd)*R);slx.lineTo(cx+Math.cos(a)*inner,cy+Math.sin(a)*inner);slx.lineTo(cx+Math.cos(a+wd)*R,cy+Math.sin(a+wd)*R);slx.fill();}
+}
+function coinRain(star){
+  const geo=new THREE.CylinderGeometry(.22,.22,.06,18), mat=new THREE.MeshStandardMaterial({color:col('#ffc83d'),metalness:.9,roughness:.25,emissive:col('#ffb000'),emissiveIntensity:.35});
+  const g=new THREE.Group(), cs=[];
+  for(let i=0;i<50;i++){const m=new THREE.Mesh(geo,mat);m.position.set(star.pos.x+rnd(-3.5,3.5),star.pos.y+rnd(4,11),star.pos.z+rnd(-3.5,3.5));m.rotation.set(rnd(0,3),rnd(0,3),rnd(0,3));m.userData.v=rnd(5,8);m.castShadow=true;g.add(m);cs.push(m);}
+  let last=0; addFx(g,4.2,k=>{const dt=(k-last)*4.2;last=k;for(const m of cs){m.position.y=Math.max(star.pos.y+.05,m.position.y-m.userData.v*dt);if(m.position.y>star.pos.y+.06){m.rotation.x+=dt*9;m.rotation.z+=dt*5;}else{m.rotation.x=Math.PI/2;}}});
+}
+function updateAnimeClip(dt){
+  if(!ANIME.on) return;
+  ANIME.t+=dt; const t=ANIME.t, F=ANIME.f, once=(k,fn)=>{if(!F[k]){F[k]=1;fn();}};
+  const flash=t<.35?1-t/.35:(t>=2.4&&t<2.7?(1-(t-2.4)/.3)*.8:0); $('#animeFlash').style.opacity=String(flash);
+  if(!reduceMotion){
+    if(t>=.04&&t<.16) canvas.style.filter='invert(1) contrast(1.4)'; else if(t>=2.4&&t<2.5) canvas.style.filter='invert(1) contrast(1.4)'; else if(canvas.style.filter) canvas.style.filter='';
+  }
+  once('txt',()=>{}); if(t>=.3) once('pop',()=>{const el=$('#animeText');el.style.opacity='1';el.classList.add('pop');$('#animeBars').classList.add('on');shake=Math.max(shake,.3);});
+  if(t>=.95) once('sfx',()=>{const el=$('#animeSfx');el.style.opacity='1';el.classList.add('pop');if(AU.ctx)SFX.hit(1,true);});
+  const slA=t<.3?0:t<2.45?.95:Math.max(0,.95-(t-2.45)/.6);
+  slCanvas.style.opacity=String(slA);
+  if(slA>0&&(!reduceMotion||!F.drawn)){drawSpeedLines();F.drawn=1;}
+  if(t>=2.45) once('swap',()=>{$('#animeBars').classList.remove('on');if(AU.ctx)SFX.whoom();$('#animeSfx').style.opacity='0';});
+  if(t>=2.6) once('coins',()=>{$('#coinGain').hidden=false;if(ANIME.star)coinRain(ANIME.star);if(AU.ctx)SFX.coin();});
+  if(t>=2.6){const n=Math.round(1000*clamp((t-2.6)/1.8,0,1));$('#coinNum').textContent='+'+n.toLocaleString();const tk=Math.floor(n/100);if(tk>ANIME.tick){ANIME.tick=tk;if(AU.ctx)SFX.coinTick();}}
+}
+
 /* ---- results & rewards ---- */
 function rollUnlock(rarity){
   let ri=RARITY_ORDER.indexOf(rarity);
@@ -2407,17 +2483,17 @@ function showResults(){
   if(!match||match.phase==='results') return;
   match.phase='results';
   const won=match.winTeam===match.me.team, M=match.mode;
-  const xp=won?120+M.size*10:50, coins=won?40+M.size*15:15;
+  const xp=won?120+M.size*10:50, coins=won?1000:15;
   let tro=won?M.troph:-4; if(profile.trophies+tro<0) tro=-profile.trophies;
   const lvBefore=levelOf(profile.xp);
   profile.xp+=xp; profile.coins+=coins; profile.trophies+=tro; profile.games++; if(won){profile.wins++;profile.clsWins[match.me.cls]=(profile.clsWins[match.me.cls]||0)+1;}
   let unlock=won?rollUnlock(M.rarity):null; let bonus=0;
   if(won&&!unlock){bonus=100;profile.coins+=bonus;}
   saveProfile(); setLobbyPresence();
-  $('#cine').hidden=true; $('#results').hidden=false; updateFsGate();
+  stopAnimeClip(); $('#cine').hidden=true; $('#results').hidden=false; updateFsGate();
   const rt=$('#rTitle'); rt.textContent=won?'Victory!':'Defeat'; rt.className=won?'win':'lose';
   const lvUp=levelOf(profile.xp)>lvBefore;
-  $('#rSub').textContent=(lvUp?`Level up! You're level ${levelOf(profile.xp)}. `:'')+(won?(bonus?`You own everything in this tier, so here's ${bonus} bonus coins.`:'Nice bonking!'):'Good try! Every match still earns XP and coins.');
+  $('#rSub').textContent=(lvUp?`Level up! You're level ${levelOf(profile.xp)}. `:'')+(won?(bonus?`You own everything in this tier, so here's ${bonus} bonus coins.`:'Nice bonking! You earned 1,000 TollUp Coins.'):'Good try! Every match still earns XP and coins.');
   $('#rXp').textContent='+'+xp; $('#rCoins').textContent='+'+(coins+bonus); $('#rTro').textContent=(tro>=0?'+':'')+tro;
   const ru=$('#rUnlock');
   if(unlock){ru.hidden=false;const isSkin=unlock.kind==='skin';const item=isSkin?SKINS[unlock.id]:MASCOTS[unlock.id];$('#rUnSw').style.background=swatchCSS(unlock.kind,unlock.id);$('#rUnRar').textContent=RARITY[item.rarity].label;$('#rUnRar').style.color=RARITY[item.rarity].color;$('#rUnName').textContent=item.name+(isSkin?' skin':' mascot');setTimeout(()=>AU.ctx&&SFX.unlock(),300);}
@@ -2657,7 +2733,7 @@ function frame(now){
   requestAnimationFrame(frame);
   const dt=Math.min(.05,(now-last)/1000); last=now; const time=now/1000;
   const home=!match; world.visible=!home; sky.visible=!home; cloudGroup.visible=!home; homeStage.visible=home; if(home) aimInd.visible=false;
-  const asp=innerWidth/innerHeight, fov=home?(asp<1?85:72):((match.phase==='cutscene'||match.phase==='results'||!match.me.alive||(match.mini&&match.mini.t>0))?(asp<1?75:55):(asp<1?62:42));
+  const asp=innerWidth/innerHeight, fov=(!home&&match.closeup&&match.phase==='cutscene')?(asp<1?44:30):home?(asp<1?85:72):((match.phase==='cutscene'||match.phase==='results'||!match.me.alive||(match.mini&&match.mini.t>0))?(asp<1?75:55):(asp<1?62:42));
   if(fov!==camera.fov){camera.fov=fov;camera.updateProjectionMatrix();}
   if(match){ if(!(match.solo&&!$('#fsGate').hidden)) updateMatch(dt,time); } else updateHome(dt,time);
   for(const t of padTops) if(t.material.emissive) t.material.emissiveIntensity=.6+Math.sin(time*5)*.35;

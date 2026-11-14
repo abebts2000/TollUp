@@ -58,6 +58,7 @@ On phones the game asks you to go fullscreen before a match. On iPhone, where br
 ## Progress and rewards
 
 - Every match gives XP and coins, and wins give trophies.
+- Winning plays an anime victory clip of your hero (speed lines, impact frames, a big VICTORY!! banner and a coin shower) and awards 1,000 TollUp Coins.
 - Wins unlock skins and mascots: 1v1 drops Common, 2v2 Rare, 3v3 Epic, Squad Legendary.
 - Common, Rare and Epic items can also be bought with coins in the Locker.
 - The leaderboard ranks players by trophies.
